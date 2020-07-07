@@ -10,7 +10,7 @@ var UIController = (function () {
     inputType:'.add__type',
     inputDescription: '.add__description',
     inputValue: '.add__value',
-    // inputBtn: '.add__btn'
+    inputBtn: '.add__btn'
   }
   return {
     getinput: function(){
@@ -23,12 +23,25 @@ var UIController = (function () {
     getDOMstrings: funciton(){
       return DOMstrings;
     }
-  };
-})();
+  }
+})()
 
 // GLOBAL APP CONTROLLER
 var controller =(function(budgetCtrl,UICtrl){
-  var DOM = UICtrl.getDOMstrings();
+  
+  var setupEventListeners = function() {
+    var DOM = UICtrl.getDOMstrings();
+
+    document.querySelector(DOM.inputBtn).addEventListener('click', ctrAddItem);
+  
+    document.addEventListener('keypress', function(event) {
+      if (event.keyCode === 13 || event.which === 13) {
+        ctrAddItem();
+      }
+    })
+
+  }
+
   var ctrAddItem = function (){
     
     // 1. Get the filed input data
@@ -43,14 +56,14 @@ var controller =(function(budgetCtrl,UICtrl){
     // 5. Display the budget on the UI
 
   }  
-  document.querySelector(DOM.inputBtn).addEventListener('click', ctrAddItem);
-
-  document.addEventListener('keypress', function(event) {
-    if (event.keyCode === 13 || event.which === 13) {
-      ctrAddItem();
+  return {
+    init:function () {
+      console.log('Application has started');
+      setupEventListeners();
     }
-
-  })
+  };
 
 
 })(budgetController,UIController);
+
+ontroller.init();
