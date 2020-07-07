@@ -1,8 +1,34 @@
 //BUDGET CONTROLLER
 var budgetController = (function (){
 
+  var Expense = function (id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
+  var Income = function (id, description, value) {
+    this.id = id;
+    this.description = description;
+    this.value = value;
+  };
 
+  var data = {
+    allItems:{
+      exp:[],
+      inc:[]
+    },
+    totals:{
+      exp:0,
+      inc:0
+    }
+  }
 })();
+
+var Expense = function (id,description, value){
+  this.id = id;
+  this.description = description;
+  this.value = value;
+};
 
 //UI CONTROLLER
 var UIController = (function () {
@@ -11,20 +37,21 @@ var UIController = (function () {
     inputDescription: '.add__description',
     inputValue: '.add__value',
     inputBtn: '.add__btn'
-  }
+  };
   return {
-    getinput: function(){
+    getinput: function() {
       return{
         type : document.querySelector(DOMstrings.inputType).value,// will be either inc or exp
         description : document.querySelector(DOMstrings.inputDescription).value,
         value : document.querySelector(DOMstrings.inputValue).value
-      };
+      }
     },
-    getDOMstrings: funciton(){
+    
+   getDOMstrings: function() {
       return DOMstrings;
     }
   }
-})()
+})();
 
 // GLOBAL APP CONTROLLER
 var controller =(function(budgetCtrl,UICtrl){
@@ -66,4 +93,4 @@ var controller =(function(budgetCtrl,UICtrl){
 
 })(budgetController,UIController);
 
-ontroller.init();
+controller.init();
